@@ -39,7 +39,7 @@ function displayAllPosts(storeData) {
         </a>
        <button class="deleteBtn" onclick="deletePost(${
          item.id
-       })">Delete</button>
+       });s">Delete</button>
          </div>
           <button id="showMore" onclick="showDetails(${
             item.id
@@ -91,9 +91,10 @@ function closeModal() {
 //display data into form
 editFormDiv.style.display = "none";
  function displayPostData(id) {
+  let conform = window.confirm("Are you want to edit post ??") ;
+  if(conform) {
   document.querySelector(".addPostBtn").style.display="none" ;
-
-  try {
+  // try {
     // let res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
     // let post = await res.json();
     let post = storeData.find((item) => item.id === id);
@@ -106,10 +107,12 @@ editFormDiv.style.display = "none";
       </div>`;
     editFormDiv.style.display = "block";
     document.querySelector("#addPost").style.display="none" ;
-
-  } catch (error) {
-    console.error(error);
+  }else{
+    alert("You can edit post any time") ;
   }
+  // } catch (error) {
+  //   console.error(error);
+  // }
 }
 
 //save post data
@@ -154,6 +157,8 @@ function deletePost(id) {
 let addPostDiv = document.querySelector(".addPostDiv");
 
 function addPostForm() {
+  let conform = window.confirm("Are you want to add post ??") ;
+  if(conform) {
   addPostDiv.innerHTML = `
   <div class="editForm" id="addPost">
         <input type="text" name="userId" class="addUserId" id="userId" placeholder="Enter your userId"/>
@@ -163,11 +168,15 @@ function addPostForm() {
       </div>
   `;
   document.querySelector("#editForm").style.display="none" ;
+}else{
+  alert("You can add post any time") ;
+}
 }
 
 /// add post
 
 function addPost() {
+
   let addUserId = document.querySelector(".addUserId").value;
   let addTitle = document.querySelector(".addTitle").value;
   let addDescription = document.querySelector(".addDescription").value;
